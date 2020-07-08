@@ -19,11 +19,23 @@ namespace DirectConstructiveFractals
 
         #region memebers
 
+        IConstructiveFractal _fractal = null;
         Bitmap _bitmap = null;
 
         #endregion
 
         #region private
+
+        void RenderFractal(Graphics g)
+        {
+            const int cShift = 16;
+            PointF start = new PointF(cShift, pictureBox1.Height / 2 + cShift);
+            PointF end = new PointF(pictureBox1.Width - cShift, pictureBox1.Height / 2 + cShift);
+            int N = 5;
+            IEnumerable<PointF> points = _fractal.Build(N, start, end);
+
+            g.DrawLines(Pens.Black, points.ToArray());
+        }
 
         void Render()
         {
@@ -33,9 +45,8 @@ namespace DirectConstructiveFractals
             Graphics g = Graphics.FromImage(_bitmap);
             g.Clear(Color.White);
 
-            g.DrawString("All ok", new Font("Arial", 24f, FontStyle.Regular), Brushes.Black, new Point(20, 20));
-
-            // TODO:
+            // отрисвока фрактала
+            RenderFractal(g);
 
             pictureBox1.Image = _bitmap;
         }
@@ -51,6 +62,7 @@ namespace DirectConstructiveFractals
         {
             pictureBox1.BackColor = Color.White;
             _bitmap = CreateBackground(pictureBox1.Width, pictureBox1.Height);
+            _fractal = new KochDirectFractal();
         }
 
         private void pictureBox1_SizeChanged(object sender, EventArgs e)
@@ -61,6 +73,11 @@ namespace DirectConstructiveFractals
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Render();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
