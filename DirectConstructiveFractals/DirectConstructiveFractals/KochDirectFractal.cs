@@ -12,11 +12,7 @@ namespace DirectConstructiveFractals
         {
             _fragmentsPerStep = 4;
             _lenght = 1.0f / 3.0f;
-            _angles = new double[_fragmentsPerStep];
-
-            _angles[0] = _angles[3] = 0;
-            _angles[1] = Math.PI / 3;
-            _angles[2] = -Math.PI / 3;
+            _angles = new double[] { 0, Math.PI / 3, -Math.PI / 3, 0 };
         }
     }
 }
