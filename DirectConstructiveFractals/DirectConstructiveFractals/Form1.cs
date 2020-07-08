@@ -34,7 +34,7 @@ namespace DirectConstructiveFractals
             int N = 5;
             IEnumerable<PointF> points = _fractal.Build(N, start, end);
 
-            g.DrawLines(Pens.Black, points.ToArray());
+            g.DrawLines(Pens.White, points.ToArray());
         }
 
         void Render()
@@ -43,7 +43,7 @@ namespace DirectConstructiveFractals
                 return;
 
             Graphics g = Graphics.FromImage(_bitmap);
-            g.Clear(Color.White);
+            g.Clear(Color.DarkBlue);
 
             // отрисвока фрактала
             RenderFractal(g);
@@ -60,7 +60,6 @@ namespace DirectConstructiveFractals
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.BackColor = Color.White;
             _bitmap = CreateBackground(pictureBox1.Width, pictureBox1.Height);
             _fractal = new KochDirectFractal();
         }
